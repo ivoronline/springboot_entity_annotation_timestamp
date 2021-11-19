@@ -1,17 +1,28 @@
 package com.ivoronline.springboot_entity_annotation_timestamp.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class PersonEntity {
 
+  //PROPERTIES
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)  //Applicable only for @Id Property
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Integer id;
   public String  name;
   public Integer age;
 
+  @CreationTimestamp
+  @Column(columnDefinition = "TIMESTAMP", updatable = false)
+  private LocalDateTime created;
+
+  @UpdateTimestamp
+  @Column(columnDefinition = "TIMESTAMP")
+  private LocalDateTime updated;
+
 }
+
